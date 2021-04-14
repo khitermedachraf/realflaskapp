@@ -10,8 +10,9 @@
 </head>
 
 <body>
+    {% include 'includes/_navbar.html' %}
     <div class="container">
-        {% include 'includes/_navbar.html' %} {% block body %} {% endblock %}
+        {% include 'includes/_messages.html' %} {% block body %} {% endblock %}
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
