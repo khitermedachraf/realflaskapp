@@ -11,6 +11,17 @@
         <th></th>
         <th></th>
     </tr>
+    {% for article in articles %}
+    <tr>
+        <td>{{article.id}}</td>
+        <td>{{article.title}}</td>
+        <td>{{article.author}}</td>
+        <td>{{article.create_date}}</td>
+        <td><a href="#" class="btn btn-default pull-right">Edit</a></td>
+        <td>
 
+        </td>
+    </tr>
+    {% endfor %}
 </table>
 {% endblock %}
