@@ -207,7 +207,7 @@ def edit_article(id):
     cur = mysql.connection.cursor()
 
     # Get article by id
-    result = cur.execute("SELECT * FROM articles WHERE id = %s", [id])
+    cur.execute("SELECT * FROM articles WHERE id = %s", [id])
 
     article = cur.fetchone()
     cur.close()
@@ -224,7 +224,6 @@ def edit_article(id):
 
         # Create Cursor
         cur = mysql.connection.cursor()
-        app.logger.info(title)
         # Execute
         cur.execute ("UPDATE articles SET title=%s, body=%s WHERE id=%s",(title, body, id))
         # Commit to DB
@@ -239,6 +238,26 @@ def edit_article(id):
 
     return render_template('edit_article.html', form=form)
 
+# Delete Article
+@app.route('/delete_article/<string:id>', methods=['POST'])
+@is_logged_in
+def delete_article(id):
+    # Create cursor
+    cur = mysql.connection.cursor()
+
+    # Execute
+    cur.execute("DELETE FROM articles WHERE id = %s", [id])
+
+    # Commit to DB
+    mysql.connection.commit()
+
+    #Close connection
+    cur.close()
+
+    flash('Article Deleted', 'success')
+
+    return redirect(url_for('dashboard'))
+    
 # Logout
 @app.route('/logout')
 @is_logged_in
